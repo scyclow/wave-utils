@@ -11,7 +11,7 @@
   },
   "scripts": {
     "clean": "rm ./build/*",
-    "watch": "rm ./build/* && webpack -watch",
+    "watch": "webpack -watch",
     "unit": "karma start"
   },
   "dependencies": {

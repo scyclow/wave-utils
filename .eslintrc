@@ -18,7 +18,14 @@
     "new-cap": 0,
     "prefer-const": 0,
     "react/prop-types": 0,
-    "one-var": 0
+    "one-var": 0,
+    "space-infix-ops": 0,
+    "no-param-reassign": 0,
+    "padded-blocks": 0,
+    "default-case": 0,
+    "indent": 0,
+    "key-spacing": 0,
+    "no-nested-ternary": 0,
   },
   "globals": {
     "React": false

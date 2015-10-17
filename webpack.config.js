@@ -2,8 +2,8 @@ var compileFiles = /\.js/;
 var ignoredFolders = /node_modules/;
 
 module.exports = {
-  context: __dirname + '/src/scripts',
-  entry: './app.js',
+  context: __dirname + '/src',
+  entry: './index.js',
 
   output: {
     filename: 'app.js',

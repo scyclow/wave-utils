@@ -90,19 +90,36 @@ function hsvToRgb({h, s, v}) {
 const hexToHsv = (hex) => rgbToHsv( hexToRgb(hex) );
 const hsvToHex = (hsv) => rgbToHex( hsvToRgb(hsv) );
 
-const wrapAround = (number, max) => (
-  number >= max ? wrapAround(number - max, max) :
-  number < 0    ? wrapAround(max + number, max) :
+const wrap = (number, max) => (
+  number >= max ? wrap(number - max, max) :
+  number < 0    ? wrap(max + number, max) :
   number
 );
 
-function applyToHex(hex, {h=0, s=0, v=0} = {}) {
+const between = (n, max, min) => Math.max(
+  Math.min(n, max),
+  min
+);
+
+function applyToHex(hex, {h=0, s=0, v=0} = {}, mod=1) {
   let hsv = hexToHsv(hex);
   return hsvToHex({
-    h: wrapAround(hsv.h + h, 360),
-    s:   Math.min(hsv.s + s,   1),
-    v:   Math.min(hsv.v + v,   1)
+    h:    wrap(hsv.h + (h / mod), 360),
+    s: between(hsv.s + (s / mod), 1, 0),
+    v: between(hsv.v + (v / mod), 1, 0)
   });
+}
+
+const randMax = (ceil) => Math.floor(
+  Math.random() * ceil
+);
+
+function randHex() {
+  let color = '#';
+  for (let i = 0; i < 6; i++) {
+    color += randMax(16).toString(16);
+  }
+  return color.toUpperCase();
 }
 
 export default {
@@ -112,5 +129,6 @@ export default {
   hsvToRgb,
   numToHex,
   rgbToHex,
-  rgbToHsv
+  rgbToHsv,
+  randHex
 };

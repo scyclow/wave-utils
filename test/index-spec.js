@@ -182,8 +182,17 @@ describe('modifying hex', () => {
       expect(applyToHex(midHex)).toEqual(midHex);
       expect(applyToHex(midHex, {s, v})).toEqual('#FF9999');
       expect(applyToHex(midHex, {h, v})).toEqual('#FFFFFF');
-      // Weird bug is preventing this form being exact
+      // Weird bug is preventing this from being exact
       // expect(applyToHex(midHex, {h, s})).toEqual('#5B5B99');
+    });
+
+    it('divides hsv properties by modification variable, if given', () => {
+      const modify = 2;
+      expect(
+        applyToHex(hex, {h, s, v}, modify)
+      ).toEqual(
+        applyToHex(hex, { h: h / modify, s: s / modify, v: v / modify })
+      );
     });
   });
 });
